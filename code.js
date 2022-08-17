@@ -5,7 +5,7 @@ window.preload = function () {
 
   p5Inst._predefinedSpriteAnimations = {};
   p5Inst._pauseSpriteAnimationsByDefault = false;
-  var animationListJSON = {"orderedKeys":["e721c18b-0f16-4e7a-95c6-6354eabe077d","7c662970-b584-4751-9288-d1736eaf0929","c3d76c73-d4b6-4d79-9682-89b64d775271","d9e82a05-326a-4865-949e-3a000b4345af","cb79cd0d-3c4e-4457-9b10-db76c0206478","27bd6f7b-942b-4c89-ab08-a238ee8ad879"],"propsByKey":{"e721c18b-0f16-4e7a-95c6-6354eabe077d":{"name":"car_black_1","sourceUrl":null,"frameSize":{"x":10,"y":18},"frameCount":1,"looping":true,"frameDelay":12,"version":"0SGzcHISjEK4CgPK__DHuPxqCdur5GPM","categories":["vehicles"],"loadedFromSource":true,"saved":true,"sourceSize":{"x":10,"y":18},"rootRelativePath":"assets/e721c18b-0f16-4e7a-95c6-6354eabe077d.png"},"7c662970-b584-4751-9288-d1736eaf0929":{"name":"car_green_1","sourceUrl":null,"frameSize":{"x":10,"y":18},"frameCount":1,"looping":true,"frameDelay":12,"version":"poYWK0PGaBue0YYidgA1ICVEX47dY4vX","categories":["vehicles"],"loadedFromSource":true,"saved":true,"sourceSize":{"x":10,"y":18},"rootRelativePath":"assets/7c662970-b584-4751-9288-d1736eaf0929.png"},"c3d76c73-d4b6-4d79-9682-89b64d775271":{"name":"car_yellow_1","sourceUrl":null,"frameSize":{"x":10,"y":18},"frameCount":1,"looping":true,"frameDelay":12,"version":"9tEqcD1qQuW1mQGMcewx1tpwrrHjCZ6y","categories":["vehicles"],"loadedFromSource":true,"saved":true,"sourceSize":{"x":10,"y":18},"rootRelativePath":"assets/c3d76c73-d4b6-4d79-9682-89b64d775271.png"},"d9e82a05-326a-4865-949e-3a000b4345af":{"name":"car_red_1","sourceUrl":null,"frameSize":{"x":10,"y":18},"frameCount":1,"looping":true,"frameDelay":12,"version":"B5vIWcvd20GvFAi89OBAvb6fqg_W6k9j","categories":["vehicles"],"loadedFromSource":true,"saved":true,"sourceSize":{"x":10,"y":18},"rootRelativePath":"assets/d9e82a05-326a-4865-949e-3a000b4345af.png"},"cb79cd0d-3c4e-4457-9b10-db76c0206478":{"name":"animation_1","sourceUrl":null,"frameSize":{"x":13,"y":13},"frameCount":1,"looping":true,"frameDelay":12,"version":"0KkqIvZb10_7mD6IixseWNU0DQKSfBdQ","loadedFromSource":true,"saved":true,"sourceSize":{"x":13,"y":13},"rootRelativePath":"assets/cb79cd0d-3c4e-4457-9b10-db76c0206478.png"},"27bd6f7b-942b-4c89-ab08-a238ee8ad879":{"name":"building_22_1","sourceUrl":null,"frameSize":{"x":50,"y":33},"frameCount":1,"looping":true,"frameDelay":12,"version":"kynXy8HNh6T7w7jNdDFmqxDztFPsjIqW","categories":["buildings"],"loadedFromSource":true,"saved":true,"sourceSize":{"x":50,"y":33},"rootRelativePath":"assets/27bd6f7b-942b-4c89-ab08-a238ee8ad879.png"}}};
+  var animationListJSON = {"orderedKeys":["67f3791a-37bb-4168-ac33-70514224014f","b75a5e53-0f8b-49c3-8d29-a966ff7c87b7"],"propsByKey":{"67f3791a-37bb-4168-ac33-70514224014f":{"name":"golfball_1","sourceUrl":null,"frameSize":{"x":20,"y":20},"frameCount":1,"looping":true,"frameDelay":12,"version":"UJxf2S.TJOqaQZGxoNPMbrdJ3q7eAbkK","categories":["sports"],"loadedFromSource":true,"saved":true,"sourceSize":{"x":20,"y":20},"rootRelativePath":"assets/67f3791a-37bb-4168-ac33-70514224014f.png"},"b75a5e53-0f8b-49c3-8d29-a966ff7c87b7":{"name":"porteriA.png_1","sourceUrl":null,"frameSize":{"x":100,"y":100},"frameCount":1,"looping":true,"frameDelay":12,"version":"7f9wsx3iGocuNFy28eMwH6f2Cpx9q0vj","loadedFromSource":true,"saved":true,"sourceSize":{"x":100,"y":100},"rootRelativePath":"assets/b75a5e53-0f8b-49c3-8d29-a966ff7c87b7.png"}}};
   var orderedKeys = animationListJSON.orderedKeys;
   var allAnimationsSingleFrame = false;
   orderedKeys.forEach(function (key) {
@@ -34,160 +34,243 @@ window.preload = function () {
     }
 // -----
 
+var playerMallet;
 
-//variable de puntuacion
+var goal1=createSprite(200,18,80,20);
+goal1.shapeColor=("yellow");
+goal1.setAnimation("porteriA.png_1");
 
-var life = 5;
+var goal2=createSprite(200,382,100,20);
+goal2.shapeColor=("yellow");
+goal2.setAnimation("porteriA.png_1");
 
-Tienda = createSprite(371,190,52,140);
-Tienda.setAnimation("building_22_1");
+//variable para almacenar diferentes estados del juego
+var gameState = "serve";
 
-
-
-var car1, car2, car3,car4;
-var boundary1, boundary2;
-var sam;
-
-  boundary1 = createSprite(190,120,420,3);
-  boundary2 = createSprite(190,260,420,3);
-  
-  sam = createSprite(50,190,13,13);
-  sam.shapeColor = "green";
-  
-  
-  
-  car1 = createSprite(100,130,10,10);
-  car1.shapeColor = "red";
-  car1.setAnimation("car_black_1");
-  
-  
-  car2 = createSprite(215,130,10,10);
-  car2.shapeColor = "red";
-  car2.setAnimation("car_green_1");
-  
-  
-  car3 = createSprite(165,250,10,10);
-  car3.shapeColor = "red";
-car3.setAnimation("car_red_1");
-    
-  
-  car4 = createSprite(270,250,10,10);
-  car4.shapeColor = "red";
-  car4.setAnimation("car_yellow_1");
-  
-
- 
- 
-//Agrega velocidad para hacer que el auto se mueva.
-
-car1.velocityY= 7;
-car2.velocityY= 7;
-car3.velocityY= -7;
-car4.velocityY= -7;
+// hacer la cancha
+var boundary1 = createSprite(200,0,400,10);
+boundary1.shapeColor = "white";
+var boundary2 = createSprite(200,400,400,10);
+boundary2.shapeColor = "white";
+var boundary3 = createSprite(0,200,10,400);
+boundary3.shapeColor = "white";
+var boundary4 = createSprite(400,200,10,400);
+boundary4.shapeColor = "white";
 
 
+
+// crear objetos y asignarles colores
+var striker = createSprite(200,200,10,10);
+striker.shapeColor = "white";
+striker.setAnimation("golfball_1");
+
+
+var playerMallet = createSprite(200,68,50,10);
+playerMallet.shapeColor = "orange";
+
+var computerMallet = createSprite(200,318,50,10);
+computerMallet.shapeColor = "lime";
+
+// variables de puntuación
+var playerScore=0;
+var compScore=0;
 
 function draw() {
-   background("white");
-  text("Lives: " + life,200,100);
-  strokeWeight(0);
-  
-  fill("lightblue");
-  rect(0,120,52,140);
- 
-  fill("yellow");
-  rect(345,120,52,140);
-  
-  
- 
-  
-  
-  
-  
-// Crea la función bounceoff para hacer que el auto rebote en los límites.
-
-car1.bounceOff(boundary1);
-car2.bounceOff(boundary1);
-car3.bounceOff(boundary1);
-car4.bounceOff(boundary1);
- 
- car1.bounceOff(boundary2);
-car2.bounceOff(boundary2);
-car3.bounceOff(boundary2);
-car4.bounceOff(boundary2);
-
-
-
-
-
-//Agregar la condición para hacer que Sam se mueva de izquiera a derecha.
-
-
-if (keyDown("RIGHT")) {
-  
-  sam.x=sam.x +2;
-}
-
-if (keyDown("LEFT")) {
-  
-  sam.x=sam.x -2;
-}
-
-
-
-
-//Agregar la condición de reducir la vida de Sam si toca el carro.
-  
- if (life==0) {
-    
- sam.x=sam.x =0;
- 
-car1.velocityY= 0;
-car2.velocityY= 0;
-car3.velocityY= 0;
-car4.velocityY= 0;
-  
-  fill("black");
-        textSize(20);
-        text("¡Fin del juego!",170,160); 
- }
+  // despejar la pantalla
+  background("green");
    
-   if(
-     sam.isTouching(car1)||
-     sam.isTouching(car2)||
-     sam.isTouching(car3)||
-     sam.isTouching(car4))
+  if (gameState == "serve") 
   {
-     sam.x = 20;
-     sam.y = 190;
-     life = life - 1;
+   
+   //muestra texto de bienvenida
+   fill("yellow");
+   textSize(18);
+   text("preciona space para jugar", 100, 150);
+  
+    //servir el delantero cuando se presiona la barra espaciadora
+      if (keyDown("space")) {
+        serve();
+        //cambiar el estado del juego
+         gameState="play";
+      }
+    
+  }
+  if (gameState == "play") {
+    
+     
+  //make the player paddle move with the Arrow keys
+  paddleMovement();
+    
+  //agregar la condición para comprobar si la puntuación de un jugador llega a 5
+        if(playerScore==5 || compScore==5)
+      {
+       
+       gameState = "end"
+      }
+        
+  }
+  if (gameState == "end") {
+    
+   striker.velocityX=0;
+   striker.velocityY=0;
+    fill("yellow");
+        textSize(18);
+        text("FIN DEL JUEGO!!",170,160);    
+    
+    
+    
+    
   }
   
-  if (sam.isTouching(Tienda)) {
-   stroke(0)
-fill(0)
-textSize(24)
-text("¡Ganaste!",120,200);
-car1.velocityY=0;
-car2.velocityY=0;
-car3.velocityY=-0;
-car4.velocityY=-0;
-sam.velocityX= 0;
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+   //mostrar puntuaciones
+  textSize(19);
+  fill("white");
+  text(compScore, 25,225);
+  text(playerScore,25,185);
+  
+  // puntuación
+   
+     if(striker.isTouching(goal1))
+      { // incrementar la puntuación del jugador
+        compScore = compScore+ 1;
+        //mostrar la cuadrícula para identificar el valor de x e y para mover al delantero al centro
+       
+        striker.x=200;
+        striker.y=200;
+        striker.velocityX=0;
+        striker.velocityY=0;
+        
+      }
+      
+      if(striker.isTouching(goal2))
+      {
+        playerScore = playerScore + 1;
+        // Reiniciar al delantero al agregar el valor central de x e y 
+        striker.x=200;
+        striker.y=200;
+        striker.velocityX=0;
+        striker.velocityY=0;
+    
+        
+      }
+       
+    
+    
+   
+ 
+ 
+ 
+  
+  
+  //IA para la paleta de la computadora
+  //hacer que se mueva con la posición y del delantero
+  computerMallet.x = striker.x;
 
+  
+  //dibujar la línea al centro
+   for (var i = 0; i < 400; i=i+20) {
+    line(i,200,i+10,200);
+  }
+  
+  //crear límites de bordes
+  //hacer que el delantero rebote con el borde superior e inferior
+  createEdgeSprites();
+  
+  striker.bounceOff(edges);
+  striker.bounceOff(playerMallet);
+  striker.bounceOff(computerMallet);
+  playerMallet.bounceOff(edges);
+  computerMallet.bounceOff(edges);
 
-
-
+  
+  //servir al delantero cuando se presiona la barra espaciadora
+  if (keyDown("space")) {
+    serve();
+  }
+  
+ 
+  drawSprites();
 }
-  
-  
-  
-  
-  
-  
-  
-  
- drawSprites();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function serve() {
+  striker.velocityX = 10;
+  striker.velocityY = 5;
+ 
 }
+
+function paddleMovement()
+{
+  if(keyDown("left")){
+    playerMallet.x = playerMallet.x-10;
+    
+  }
+  
+  if(keyDown("right")){
+    playerMallet.x = playerMallet.x+10;
+    
+  }
+  
+  if(keyDown("up")){
+   if(playerMallet.y>25)
+   {
+    playerMallet.y = playerMallet.y- 10;
+   }
+  }
+  
+  if(keyDown("down")){
+    if(playerMallet.y<120)
+   {
+    playerMallet.y = playerMallet.y+10;
+   }
+  }
+}
+
 
 // -----
     try { window.draw = draw; } catch (e) {}
